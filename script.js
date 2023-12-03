@@ -1,54 +1,37 @@
-var map = [[{"desc" : "a field"}, {"desc" : "the outskirts of Lithwood"}, {"desc" : "the City of Lithwood"}],
-           [{"desc" : "a field"}, {"desc" : "a forest"}, {"desc" : "a forest"}],
-           [{"desc" : "a swamp"}, {"desc" : "a forest"}, {"desc" : "a forest"}]];
-var pos = [0,0];
+let map = {
+    "TestPlanet1": {
+        "pos": [2, 2]
+    },
+    "TestPlanet2": {
+        "pos": [0, 0]
+    }
+};
+
+let pPos = "TestPlanet2";
 
 function gameLoop() {
-    console.log(`You are in ${map[pos[0]][pos[1]]["desc"]}.`);
-    var uInput = prompt("=> ");
-    switch(uInput.toLowerCase()) {
-        case "north":
-        case "n":
-            if(pos[1] > 0) {
-                pos[1]--;
-            } else {
-                console.log("Can't move further!");
+    console.log(`You are on ${pPos}.`);
+    let uInput = prompt("=>  ");
+    let arrInput = uInput.split(" ");
+    switch(arrInput[0]) {
+        case "travel":
+            try {
+                console.log(`Request: travel ${pPos}-${arrInput[1]}`);
+                console.log(`Distance: ${findDist(map[arrInput[1]]["pos"], map[pPos]["pos"]).toFixed(2)} light years`);
+            } catch(error) {
+                console.log(error);
+            } finally {
+                break;
             }
-            break;
-        case "south":
-        case "s":
-            if(pos[1] < 2) {
-                pos[1]++;
-            } else {
-                console.log("Can't move further!");
-            }
-            break;
-        case "west":
-        case "w":
-            if(pos[0] > 0) {
-                pos[0]--;
-            } else {
-                console.log("Can't move further!");
-            }
-            break;
-        case "east":
-        case "e":
-            if(pos[0] < 2) {
-                pos[0]++;
-            } else {
-                console.log("Can't move further!");
-            }
-            break;
-        case "gps":
-            console.log(pos);
-            break;
-        case "help":
-            console.log("Figure it out bozo")
-        case "map":
-            console.log("In the makings\n\n\n\nbozo")
-        default:
-            console.log(`${uInput} is not recognized as an internal or external program, operable program, or batch file.`);
     }
 }
 
-const interval = setInterval(() => gameLoop(), 33);
+function findDist(alpha, beta) {
+    let x1 = alpha[0];
+    let y1 = alpha[1];
+    let x2 = beta[0];
+    let y2 = beta[1];
+    return Math.sqrt((x2-x1)**2+(y2-y1)**2);
+}
+
+setInterval(() => gameLoop(), 33);

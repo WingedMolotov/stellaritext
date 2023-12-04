@@ -1,28 +1,34 @@
 let map = {
-    "TestPlanet1": {
-        "pos": [2, 2]
-    },
-    "TestPlanet2": {
+    "Base": {
         "pos": [0, 0]
+    },
+    "Relagath": {
+        "pos": [2, 2]
     }
 };
 
-let pPos = "TestPlanet2";
+let pPos = "Base";
 
 function gameLoop() {
     console.log(`You are on ${pPos}.`);
     let uInput = prompt("=>  ");
     let arrInput = uInput.split(" ");
-    switch(arrInput[0]) {
+    switch(arrInput[0].toLowerCase()) {
         case "travel":
             try {
-                console.log(`Request: travel ${pPos}-${arrInput[1]}`);
-                console.log(`Distance: ${findDist(map[arrInput[1]]["pos"], map[pPos]["pos"]).toFixed(2)} light years`);
+                let newLoc = arrInput[1]
+                let dist = findDist(map[newLoc]["pos"], map[pPos]["pos"]).toFixed(2);
+                console.log(`Request: travel ${pPos}-${newLoc}`);
+                console.log(`Distance: ${dist} light years`);
+                console.log(`Status: Arrived at ${newLoc}`);
+                pPos = newLoc;
             } catch(error) {
-                console.log(error);
+                console.log("Error: Request invalid");
             } finally {
                 break;
             }
+        default:
+            console.log("Error: Request invalid");
     }
 }
 

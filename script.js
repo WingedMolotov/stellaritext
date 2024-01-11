@@ -9,6 +9,11 @@ let map = {
 
 let pPos = "Base";
 
+function konsoleLog(txt) {
+    let konsole = document.getElementById("konsole");
+    konsole.innerHTML += `\n${txt}`;
+}
+
 function gameLoop() {
     console.log(`You are on ${pPos}.`);
     let uInput = prompt("=>  ");

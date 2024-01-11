@@ -15,7 +15,7 @@ function konsoleLog(txt) {
 }
 
 function gameLoop() {
-    console.log(`You are on ${pPos}.`);
+    konsoleLog(`You are on ${pPos}.`);
     let uInput = prompt("=>  ");
     let arrInput = uInput.split(" ");
     switch(arrInput[0].toLowerCase()) {
@@ -23,17 +23,17 @@ function gameLoop() {
             try {
                 let newLoc = arrInput[1]
                 let dist = findDist(map[newLoc]["pos"], map[pPos]["pos"]).toFixed(2);
-                console.log(`Request: travel ${pPos}-${newLoc}`);
-                console.log(`Distance: ${dist} light years`);
-                console.log(`Status: Arrived at ${newLoc}`);
+                konsoleLog(`Request: travel ${pPos}-${newLoc}`);
+                konsoleLog(`Distance: ${dist} light years`);
+                konsoleLog(`Status: Arrived at ${newLoc}`);
                 pPos = newLoc;
             } catch(error) {
-                console.log("Error: Request invalid");
+                konsoleLog("Error: Request invalid");
             } finally {
                 break;
             }
         default:
-            console.log("Error: Request invalid");
+            konsoleLog("Error: Request invalid");
     }
 }
 
